@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Golazo</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></script>
+    </head>
+    <body>
+        <div class="ui container wrapper">
+            <div class="ui two column stackable grid">
+                <div class="column main">
+                    <h1 class="ui header white">View Standings</h1>
+                    <table>
+                        <tr>
+                            <th>P</th>
+                            <th>Team</th>
+                            <th>GP</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>F</th>
+                            <th>A</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                        </tr>
+                        {% for team in premierleague %}
+                        <tr>
+                            <td>{{ team.rank }}</td>
+                            <td>{{ team.name }}</td>
+                            <td>{{ team.gp }}</td>
+                            <td>{{ team.win }}</td>
+                            <td>{{ team.draw }}</td>
+                            <td>{{ team.loss }}</td>
+                            <td>{{ team.goalsfor }}</td>
+                            <td>{{ team.goalsagainst }}</td>
+                            <td>{{ team.goaldif }}</td>
+                            <td>{{ team.pts }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="column main2">
+                    <h1 class="ui header white">View Your Teams</h1>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
