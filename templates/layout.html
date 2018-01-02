@@ -5,47 +5,62 @@
         <title>Golazo</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></script>
     </head>
     <body>
         <div class="ui container wrapper">
-            <div class="ui two column stackable grid">
+            <div class="ui two column stackable center aligned grid">
                 <div class="column main">
-                    <h1 class="ui header white">View Standings</h1>
-                    <table>
-                        <tr>
-                            <th>P</th>
-                            <th>Team</th>
-                            <th>GP</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>F</th>
-                            <th>A</th>
-                            <th>GD</th>
-                            <th>Pts</th>
-                        </tr>
-                        {% for team in premierleague %}
-                        <tr>
-                            <td>{{ team.rank }}</td>
-                            <td>{{ team.name }}</td>
-                            <td>{{ team.gp }}</td>
-                            <td>{{ team.win }}</td>
-                            <td>{{ team.draw }}</td>
-                            <td>{{ team.loss }}</td>
-                            <td>{{ team.goalsfor }}</td>
-                            <td>{{ team.goalsagainst }}</td>
-                            <td>{{ team.goaldif }}</td>
-                            <td>{{ team.pts }}</td>
-                        </tr>
+                    <h1 class="ui blue header">View Standings</h1>
+                    <div class="ui inverted accordion">
+                        {% for league in standings %}
+                        <div class="title">
+                            <i class="dropdown icon"></i>
+                            {{ league.name }}
+                        </div>
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <th>P</th>
+                                    <th>Team</th>
+                                    <th>GP</th>
+                                    <th>W</th>
+                                    <th>D</th>
+                                    <th>L</th>
+                                    <th>F</th>
+                                    <th>A</th>
+                                    <th>GD</th>
+                                    <th>Pts</th>
+                                </tr>
+                                {% for team in league.data %}
+                                <tr>
+                                    <td>{{ team.rank }}</td>
+                                    <td>{{ team.name }}</td>
+                                    <td>{{ team.gp }}</td>
+                                    <td>{{ team.win }}</td>
+                                    <td>{{ team.draw }}</td>
+                                    <td>{{ team.loss }}</td>
+                                    <td>{{ team.goalsfor }}</td>
+                                    <td>{{ team.goalsagainst }}</td>
+                                    <td>{{ team.goaldif }}</td>
+                                    <td>{{ team.pts }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
                         {% endfor %}
-                    </table>
+                    </div>
                 </div>
                 <div class="column main2">
-                    <h1 class="ui header white">View Your Teams</h1>
+                    <h1 class="ui blue header">View Your Teams</h1>
                 </div>
             </div>
         </div>
+        <script language="javascript">
+            $(document).ready(function(){
+                $(".ui.accordion").accordion();
+            });
+        </script>
     </body>
 </html>

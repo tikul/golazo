@@ -4,13 +4,6 @@ html, body{
     height: 100% !important;
 }
 
-/* .main{
-    background-color: #53a2be;
-}
-.main2{
-    background-color:#1d84b5;
-} */
-
 .ui.grid{
     min-height: 100%;
 }
@@ -24,8 +17,9 @@ body{
     background-image: url("./images/bg1.jpg") !important;
     background-size: cover !important;
     background-position: bottom right !important;
+    z-index: -5;
 }
 
 .wrapper{
-    color: white;
+    color: white !important;
 }

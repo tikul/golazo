@@ -7,7 +7,14 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///golazo.db'
 db = SQLAlchemy(app)
 
-leagues = ["premierleague"]
+leagues = ["premierleague", "laligafootball", "bundesligafootball", "serieafootball", "ligue1football"]
+fullname = {
+    "premierleague": "Premier League",
+    "laligafootball": "La Liga",
+    "bundesligafootball": "Bundesliga",
+    "serieafootball": "Serie A",
+    "ligue1football": "Ligue 1"
+}
 
 def parse_team(team):
     if team is None:
@@ -93,5 +100,10 @@ class Standing(db.Model):
 
 @app.route('/')
 def hello_world():
-    pl = query_standings("premierleague")
-    return render_template("layout.html", premierleague=pl)
+    standings = []
+    for team in leagues:
+        data = {}
+        data["name"] = fullname[team]
+        data["data"] = query_standings(team)
+        standings.append(data)
+    return render_template("layout.html", standings=standings)
